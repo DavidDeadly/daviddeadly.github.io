@@ -14,7 +14,7 @@ const cardGenerator = () => {
     '10',
     'K',
     'Q',
-    'J',
+    'J'
   ];
   const suits = ['♣️', '♥', '♠', '♦'];
 
@@ -36,5 +36,5 @@ const cardGenerator = () => {
 };
 
 module.exports = {
-  cardGenerator,
+  cardGenerator
 };

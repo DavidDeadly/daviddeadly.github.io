@@ -20,5 +20,5 @@ class Card {
 }
 
 module.exports = {
-  Card,
+  Card
 };
