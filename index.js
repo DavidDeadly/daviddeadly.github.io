@@ -9,24 +9,30 @@ const consoleInput = readLine.createInterface({
   output: stdout
 });
 
-const presentCard = (card) => {
-  console.log(
-    `
+const presentCard = ([card]) => {
+  console.log(`
     ${'_'.repeat(card.name.length + 4 + card.suit.length)}
-    |${card.name}//${card.suit}|   
-  `
-  );
+    |${card.name}//${card.suit}|`);
 };
 
 const game = (player) => {
   const cards = cardGenerator();
+  const roundCards = [];
 
-  const card1 = cards[Math.floor(Math.random() * cards.length)];
-  const card2 = cards[Math.floor(Math.random() * cards.length)];
+  const getCard = () => {
+    if (!cards.length) {
+      console.log("There's no more cards!");
+      process.exit();
+    }
+    const index = Math.floor(Math.random() * cards.length);
+    const card = cards.splice(index, 1);
+    roundCards.concat(card);
+    presentCard(card);
+  };
 
   console.log('Here are your initial cards!!');
-  presentCard(card1);
-  presentCard(card2);
+  getCard();
+  getCard();
 
   consoleInput.question('Do you want to play again? [Y]/[N]', (ans) => {
     if (ans.toUpperCase() !== 'Y') process.exit();
