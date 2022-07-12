@@ -17,7 +17,7 @@ const presentCard = ([card]) => {
 
 const game = (player) => {
   const cards = cardGenerator();
-  const roundCards = [];
+  let roundCards = [];
 
   const getCard = () => {
     if (!cards.length) {
@@ -26,13 +26,17 @@ const game = (player) => {
     }
     const index = Math.floor(Math.random() * cards.length);
     const card = cards.splice(index, 1);
-    roundCards.concat(card);
+    roundCards = roundCards.concat(card);
     presentCard(card);
   };
 
   console.log('Here are your initial cards!!');
   getCard();
   getCard();
+
+  const totalSum = roundCards.reduce((sum, card) => sum + card.getCardValue, 0);
+
+  console.log(`The current sum is ${totalSum}`);
 
   consoleInput.question('Do you want to play again? [Y]/[N]', (ans) => {
     if (ans.toUpperCase() !== 'Y') process.exit();
