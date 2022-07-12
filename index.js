@@ -1,3 +1,9 @@
-console.log('hola mundo!!');
+const { cardGenerator } = require('./funcs/cardGenerator');
 
-var item = new Object();
+const cards = cardGenerator();
+
+// console.log(cards[0].getCardValue);
+// console.log(cards[0].alreadyThrown());
+// console.log(cards[0].getCardValue);
+
+console.log(cards);
