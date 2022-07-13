@@ -8,7 +8,8 @@ const presentCard = ([card]) => {
 
 const game = (player, consoleInput) => {
   console.clear();
-  console.log(`Hi ${player.name} Welcome to Sofka Black jack!!\n`);
+  console.log(`Hi ${player.name} Welcome to Sofka Black jack!!`);
+  console.log(`Your current prize is ${player.prize}\n`);
 
   const cards = cardGenerator();
   let roundCards = [];
@@ -41,9 +42,11 @@ const game = (player, consoleInput) => {
 
     if (totalSum >= 18 && totalSum <= 21) {
       console.log(totalSum === 21 ? 'BLACKJAAAACK!!!' : 'YOU WIN!!!!!');
+      player.win();
       askForPlayAgain();
     } else if (totalSum > 21) {
       console.log('YOU LOSEEEEE!!! Sorry :cc');
+      console.log(`This is your total score: ${player.prize}\n`);
       process.exit();
     } else {
       consoleInput.question('Do you want another card?? [Y]/[N]', (ans) => {
