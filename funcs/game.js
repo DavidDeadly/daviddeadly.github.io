@@ -1,6 +1,7 @@
+const { Card } = require('../classes/Card');
 const { cardGenerator } = require('./cardGenerator');
 
-const presentCard = ([card]) => {
+const presentCard = (card) => {
   console.log(`
     ${'_'.repeat(card.name.length + 4 + card.suit.length)}
     |${card.name}//${card.suit}|`);
@@ -12,11 +13,14 @@ const game = (player, consoleInput) => {
   console.log(`Your current prize is ${player.prize}\n`);
 
   const cards = cardGenerator();
-  let roundCards = [];
+  const roundCards = [];
 
   const askForPlayAgain = () => {
     consoleInput.question('Do you want to play again? [Y]/[N]', (ans) => {
-      if (ans.toUpperCase() !== 'Y') process.exit();
+      if (ans.toUpperCase() !== 'Y') {
+        console.log(`This is your total score: ${player.prize}\n`);
+        process.exit();
+      }
       game(player, consoleInput);
     });
   };
@@ -27,8 +31,9 @@ const game = (player, consoleInput) => {
       process.exit();
     }
     const index = Math.floor(Math.random() * cards.length);
-    const card = cards.splice(index, 1);
-    roundCards = roundCards.concat(card);
+    const [card] = cards.splice(index, 1);
+    if (card.name === 'A') Card.nerfAces(cards, card.suit);
+    roundCards.push(card);
     presentCard(card);
   };
 
@@ -50,7 +55,11 @@ const game = (player, consoleInput) => {
       process.exit();
     } else {
       consoleInput.question('Do you want another card?? [Y]/[N]', (ans) => {
-        if (ans.toUpperCase() !== 'Y') return;
+        if (ans.toUpperCase() !== 'Y') {
+          console.log("Being a coward isn't a sin...");
+          askForPlayAgain();
+          return;
+        }
         getCard();
         sumAndAsk();
       });

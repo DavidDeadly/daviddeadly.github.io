@@ -32,7 +32,7 @@ const cardGenerator = () => {
     allCards.push(cardsBySuit);
   }
 
-  return allCards.flat();
+  return allCards.flat().sort(() => 0.5 - Math.random());
 };
 
 module.exports = {

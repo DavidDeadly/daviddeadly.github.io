@@ -17,6 +17,19 @@ class Card {
   get getCardValue() {
     return this.#value;
   }
+
+  static nerfAces(cards, suit) {
+    const x = cards
+      .filter((c) => c.name === 'A')
+      .map((c) => {
+        if (c.suit !== suit) {
+          c.alreadyThrown();
+        }
+        return c.getCardValue;
+      });
+
+    return x;
+  }
 }
 
 module.exports = {
