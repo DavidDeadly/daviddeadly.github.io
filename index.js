@@ -7,21 +7,25 @@ import { $, toggelEl, createEl } from './funcs/utilDomFuncs.js';
 const playBtn = $('#playBtn'),
   divGame = $('#game');
 
-const setUpGame = (name) => {
+const setUpGame = () => {
+  const input = $('#inputName');
+  const name = input.value;
+  if (!name) {
+    alert('YOU NEED A NAME!!!');
+    return;
+  }
   const cards = cardGenerator();
   const player = new Player(name);
-  console.log(player);
-  console.log(cards);
-  // game(player, cards);
+  game(player, cards);
 };
 
 playBtn.addEventListener('click', () => {
   toggelEl(playBtn);
   const h2 = createEl({
     tag: 'h2',
-    text: "Game's about started!!!",
+    text: "Let's play!!!",
     attributes: {
-      id: 'gameStartTitle'
+      id: 'gameTitle'
     }
   });
   const input = createEl({
@@ -38,24 +42,22 @@ playBtn.addEventListener('click', () => {
   });
   const startGameBtn = createEl({
     tag: 'button',
-    text: 'Start game',
+    text: 'Start Playing',
     attributes: {
-      className: 'btns border_5 d_transition'
+      className: 'btns border_5 d_transition',
+      id: 'startBtn'
     }
   });
 
-  startGameBtn.addEventListener('click', () => {
-    if (!input.value) {
-      alert('YOU NEED A NAME!!!');
-      return;
+  startGameBtn.addEventListener('click', setUpGame);
+
+  input.addEventListener('keypress', (event) => {
+    if (event.key === 'Enter') {
+      setUpGame();
     }
-    setUpGame(input.value);
   });
 
   divGame.classList.remove('gameStart');
   divGame.classList.add('useRegister');
-  divGame.append(h2);
-  divGame.append(label);
-  divGame.append(input);
-  divGame.append(startGameBtn);
+  divGame.append(h2, label, input, startGameBtn);
 });

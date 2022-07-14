@@ -1,17 +1,91 @@
 import Card from '../classes/Card.js';
+import { $, toggelEl, createEl } from './utilDomFuncs.js';
+
+const divGame = $('#game');
 
 const presentCard = (card) => {
-  console.log(`
-    ${'_'.repeat(card.name.length + 4 + card.suit.length)}
-    |${card.name}//${card.suit}|`);
+  // TODO: show suits
+  // TODO: show suits
+  // TODO: show suits
+
+  const msgCards = $('#msgCards');
+  msgCards.innerText += `${card.name}, `;
+};
+
+const clearSetUpScreen = () => {
+  const input = $('#inputName'),
+    label = $('#labelName'),
+    startBtn = $('#startBtn');
+  toggelEl(input);
+  toggelEl(label);
+  toggelEl(startBtn);
 };
 
 const game = (player, cards) => {
-  console.clear();
-  console.log(`Hi ${player.name} Welcome to Sofka Black jack!!`);
-  console.log(`Your current prize is ${player.prize}\n`);
-
+  clearSetUpScreen();
   const roundCards = [];
+
+  const gameTitle = $('#gameTitle');
+  gameTitle.innerText = 'Here are your initial cards!!';
+
+  const message = createEl({
+    tag: 'h4',
+    text: `Do you want another card, ${player.name}?`,
+    attributes: {
+      id: 'msg'
+    }
+  });
+  const prize = createEl({
+    tag: 'span',
+    text: `Your current prize is ${player.prize}`,
+    attributes: {
+      id: 'prize'
+    }
+  });
+  const msgCards = createEl({
+    tag: 'h3',
+    text: 'Cards: ',
+    attributes: {
+      id: 'msgCards'
+    }
+  });
+
+  const msgSum = createEl({
+    tag: 'h3',
+    attributes: {
+      id: 'msgSum'
+    }
+  });
+
+  const divBtns = createEl({
+    tag: 'div',
+    attributes: {
+      id: 'divBtns'
+    }
+  });
+
+  const restartGameBtn = createEl({
+    tag: 'button',
+    text: 'Play Again',
+    attributes: {
+      className: 'btns border_5 d_transition',
+      id: 'restartBtn'
+    }
+  });
+
+  const drawCardBtn = createEl({
+    tag: 'button',
+    text: 'Draw card',
+    attributes: {
+      className: 'btns border_5 d_transition',
+      id: 'drawBtn'
+    }
+  });
+
+  drawCardBtn.disabled = true;
+  divBtns.append(restartGameBtn, drawCardBtn);
+
+  divGame.append(msgCards, msgSum, message, prize, divBtns);
 
   // const askForPlayAgain = () => {
   //   consoleInput.question('Do you want to play again? [Y]/[N]', (ans) => {
@@ -24,10 +98,6 @@ const game = (player, cards) => {
   // };
 
   const getCard = () => {
-    if (!cards.length) {
-      console.log("There's no more cards!");
-      process.exit();
-    }
     const index = Math.floor(Math.random() * cards.length);
     const [card] = cards.splice(index, 1);
     if (card.name === 'A') Card.nerfAces(cards, card.suit);
@@ -41,30 +111,26 @@ const game = (player, cards) => {
       0
     );
 
-    console.log(`\nThe current sum is ${totalSum}\n`);
+    msgSum.innerText = `Sum: ${totalSum}`;
 
     if (totalSum >= 18 && totalSum <= 21) {
-      console.log(totalSum === 21 ? 'BLACKJAAAACK!!!' : 'YOU WIN!!!!!');
+      message.innerText = totalSum === 21 ? 'BLACKJAAAACK!!!' : 'YOU WIN!!!!!';
       player.win();
+      prize.innerText = `Your current prize is ${player.prize}`;
       // askForPlayAgain();
     } else if (totalSum > 21) {
-      console.log('YOU LOSEEEEE!!! Sorry :cc');
-      console.log(`This is your total score: ${player.prize}\n`);
-      process.exit();
+      message.innerText = 'YOU LOSEEEEE!!! Sorry :cc';
+      prize.innerText = `This is your total score: ${player.prize}`;
     } else {
-      // consoleInput.question('Do you want another card?? [Y]/[N]', (ans) => {
-      //   if (ans.toUpperCase() !== 'Y') {
-      //     console.log("Being a coward isn't a sin...");
-      //     askForPlayAgain();
-      //     return;
-      //   }
-      //   getCard();
-      //   sumAndAsk();
-      // });
+      drawCardBtn.disabled = false;
     }
   };
 
-  console.log('Here are your initial cards!!');
+  drawCardBtn.addEventListener('click', () => {
+    getCard();
+    sumAndAsk();
+  });
+
   getCard();
   getCard();
 

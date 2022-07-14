@@ -7,7 +7,7 @@
 body {
   display: grid;
   place-content: center;
-  background-image: url("./utils/poker_background.jpg");
+  background-image: url('./utils/poker_background.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -28,6 +28,12 @@ h1 {
   background-color: rgba(14, 82, 14, 0.7);
   width: 350px;
   height: 300px;
+}
+
+#divBtns {
+  display: flex;
+  margin-top: 2rem;
+  gap: 1rem;
 }
 
 .useRegister {
@@ -79,3 +85,7 @@ h2 {
   -o-transform: scale(1.1);
 }
 
+.btns:disabled {
+  background-color: gray;
+  cursor: default;
+}
