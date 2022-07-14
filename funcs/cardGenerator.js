@@ -1,4 +1,4 @@
-const { Card } = require('../classes/Card');
+import Card from '../classes/Card.js';
 
 const cardGenerator = () => {
   const cards = [
@@ -35,6 +35,4 @@ const cardGenerator = () => {
   return allCards.flat().sort(() => 0.5 - Math.random());
 };
 
-module.exports = {
-  cardGenerator
-};
+export default cardGenerator;

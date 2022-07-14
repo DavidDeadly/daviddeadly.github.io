@@ -1,5 +1,4 @@
-const { Card } = require('../classes/Card');
-const { cardGenerator } = require('./cardGenerator');
+import Card from '../classes/Card.js';
 
 const presentCard = (card) => {
   console.log(`
@@ -7,23 +6,22 @@ const presentCard = (card) => {
     |${card.name}//${card.suit}|`);
 };
 
-const game = (player, consoleInput) => {
+const game = (player, cards) => {
   console.clear();
   console.log(`Hi ${player.name} Welcome to Sofka Black jack!!`);
   console.log(`Your current prize is ${player.prize}\n`);
 
-  const cards = cardGenerator();
   const roundCards = [];
 
-  const askForPlayAgain = () => {
-    consoleInput.question('Do you want to play again? [Y]/[N]', (ans) => {
-      if (ans.toUpperCase() !== 'Y') {
-        console.log(`This is your total score: ${player.prize}\n`);
-        process.exit();
-      }
-      game(player, consoleInput);
-    });
-  };
+  // const askForPlayAgain = () => {
+  //   consoleInput.question('Do you want to play again? [Y]/[N]', (ans) => {
+  //     if (ans.toUpperCase() !== 'Y') {
+  //       console.log(`This is your total score: ${player.prize}\n`);
+  //       process.exit();
+  //     }
+  //     game(player, consoleInput);
+  //   });
+  // };
 
   const getCard = () => {
     if (!cards.length) {
@@ -48,21 +46,21 @@ const game = (player, consoleInput) => {
     if (totalSum >= 18 && totalSum <= 21) {
       console.log(totalSum === 21 ? 'BLACKJAAAACK!!!' : 'YOU WIN!!!!!');
       player.win();
-      askForPlayAgain();
+      // askForPlayAgain();
     } else if (totalSum > 21) {
       console.log('YOU LOSEEEEE!!! Sorry :cc');
       console.log(`This is your total score: ${player.prize}\n`);
       process.exit();
     } else {
-      consoleInput.question('Do you want another card?? [Y]/[N]', (ans) => {
-        if (ans.toUpperCase() !== 'Y') {
-          console.log("Being a coward isn't a sin...");
-          askForPlayAgain();
-          return;
-        }
-        getCard();
-        sumAndAsk();
-      });
+      // consoleInput.question('Do you want another card?? [Y]/[N]', (ans) => {
+      //   if (ans.toUpperCase() !== 'Y') {
+      //     console.log("Being a coward isn't a sin...");
+      //     askForPlayAgain();
+      //     return;
+      //   }
+      //   getCard();
+      //   sumAndAsk();
+      // });
     }
   };
 
@@ -71,9 +69,7 @@ const game = (player, consoleInput) => {
   getCard();
 
   sumAndAsk();
-  askForPlayAgain();
+  // askForPlayAgain();
 };
 
-module.exports = {
-  game
-};
+export default game;

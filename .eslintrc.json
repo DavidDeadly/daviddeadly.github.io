@@ -1,8 +1,8 @@
 {
   "env": {
-    "commonjs": true,
+    "commonjs": false,
     "es2021": true,
-    "node": true
+    "browser": true
   },
   "extends": [
     "airbnb-base",
@@ -13,13 +13,14 @@
   ],
   "parserOptions": {
     "ecmaVersion": "latest",
-    "sourceType": "script"
+    "sourceType": "module"
   },
   "rules": {
     "prettier/prettier": [
       "error"
     ],
     "no-plusplus": "off",
-    "no-console": "off"
+    "no-console": "off",
+    "import/extensions": "off"
   }
 }

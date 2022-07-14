@@ -1,4 +1,4 @@
-class Player {
+export default class Player {
   constructor(name) {
     this.name = name;
     this.prize = 0;
@@ -8,7 +8,3 @@ class Player {
     this.prize += 1000;
   }
 }
-
-module.exports = {
-  Player
-};

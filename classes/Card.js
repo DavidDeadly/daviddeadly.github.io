@@ -1,4 +1,4 @@
-class Card {
+export default class Card {
   #value;
 
   constructor(name, value, suit) {
@@ -31,7 +31,3 @@ class Card {
     return x;
   }
 }
-
-module.exports = {
-  Card
-};

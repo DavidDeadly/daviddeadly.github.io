@@ -1,16 +1,15 @@
-const { stdin, stdout } = require('process');
-const readLine = require('readline');
-const { Player } = require('./classes/Player');
-const { game } = require('./funcs/game');
+import Player from './classes/Player.js';
+import game from './funcs/game.js';
+import cardGenerator from './funcs/cardGenerator.js';
 
-const consoleInput = readLine.createInterface({
-  input: stdin,
-  output: stdout
-});
+const playBtn = document.querySelector('#playBtn');
 
 const setUpGame = (name) => {
+  const cards = cardGenerator();
   const player = new Player(name);
-  game(player, consoleInput);
+  game(player, cards);
 };
 
-consoleInput.question("What's your name??\n", setUpGame);
+playBtn.addEventListener('click', () => {
+  alert('You started a new game!!');
+});
