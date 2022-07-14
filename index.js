@@ -1,24 +1,7 @@
 import Player from './classes/Player.js';
 import game from './funcs/game.js';
 import cardGenerator from './funcs/cardGenerator.js';
-
-// utility functions
-const $ = (query) => document.querySelector(query),
-  toggelEl = (element) =>
-    element.style.display === ''
-      ? (element.style.display = 'none')
-      : (element.style.display = ''),
-  createEl = ({ tag, text, attributes }) => {
-    const el = document.createElement(tag);
-    const content = text && document.createTextNode(text);
-    text && el.appendChild(content);
-
-    attributes &&
-      Object.keys(attributes).forEach((value) => {
-        el[value] = attributes[value];
-      });
-    return el;
-  };
+import { $, toggelEl, createEl } from './funcs/utilDomFuncs.js';
 
 // Elements
 const playBtn = $('#playBtn'),
@@ -49,22 +32,28 @@ playBtn.addEventListener('click', () => {
     tag: 'label',
     text: 'Your name:',
     attributes: {
-      htmlFor: 'inputName'
+      htmlFor: 'inputName',
+      id: 'labelName'
     }
   });
   const startGameBtn = createEl({
     tag: 'button',
-    text: 'Start game'
+    text: 'Start game',
+    attributes: {
+      className: 'btns border_5 d_transition'
+    }
   });
 
   startGameBtn.addEventListener('click', () => {
     if (!input.value) {
-      console.error('YOU NEED A NAME!!!');
+      alert('YOU NEED A NAME!!!');
       return;
     }
     setUpGame(input.value);
   });
 
+  divGame.classList.remove('gameStart');
+  divGame.classList.add('useRegister');
   divGame.append(h2);
   divGame.append(label);
   divGame.append(input);
