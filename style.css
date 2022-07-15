@@ -27,7 +27,9 @@ h1 {
 #game {
   background-color: rgba(14, 82, 14, 0.7);
   width: 350px;
-  height: 300px;
+  height: 350px;
+  border: dashed;
+  border-color: rgb(30, 158, 30);
 }
 
 #divBtns {
@@ -43,7 +45,8 @@ h1 {
 }
 
 h2 {
-  margin: 2rem 0;
+  font-size: 1.5rem;
+  margin: 1.5rem 0;
 }
 
 .gameStart {
@@ -51,8 +54,65 @@ h2 {
   place-content: center;
 }
 
-.border_5 {
+#divCards {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+#msgSum {
+  border-style: solid;
+  border-width: 1px;
+  padding: 10px;
+  border-color: rgb(4, 160, 4);
+}
+
+#prize {
+  color: gold;
+  font-size: 1.2rem;
+}
+
+.card {
+  display: flex;
+  gap: 5px;
+  font-size: 2rem;
+  position: relative;
+
+  border: solid;
+  border-width: 1px;
+  border-color: rgb(189, 49, 49);
+  padding: 5px;
+}
+
+#msg {
+  font-size: 1.2rem;
+  padding: 10px;
+  font-style: italic;
+  color: rgb(170, 167, 167);
+}
+
+#labelName {
+  color: gold;
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+}
+
+#inputName {
+  background-color: gray;
   border: none;
+  padding: 0.5rem;
+  width: 70%;
+  font-size: 1.5rem;
+  color: rgba(14, 82, 14, 0.7);
+  text-align: center;
+}
+
+#inputName:focus {
+  outline: none;
+}
+
+.border_5 {
   border-radius: 5px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -74,15 +134,16 @@ h2 {
   background-color: goldenrod;
   max-width: max-content;
   margin: auto;
+  border: none;
 }
 
 .btns:hover {
   cursor: pointer;
-  transform: scale(1.1);
-  -webkit-transform: scale(1.1);
-  -moz-transform: scale(1.1);
-  -ms-transform: scale(1.1);
-  -o-transform: scale(1.1);
+  transform: scale(1.05);
+  -webkit-transform: scale(1.05);
+  -moz-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  -o-transform: scale(1.05);
 }
 
 .btns:disabled {

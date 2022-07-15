@@ -5,18 +5,25 @@ import { $, hideEl, createEl, appearEl } from './utilDomFuncs.js';
 const divGame = $('#game');
 
 export const cleanGameScreen = () => {
-  [$('#msgCards'), $('#msgSum'), $('#msg'), $('#prize')].forEach((e) =>
+  [$('#divCards'), $('#msgSum'), $('#msg'), $('#prize')].forEach((e) =>
     e.remove()
   );
 };
 
 const presentCard = (card) => {
-  // TODO: show suits
-  // TODO: show suits
-  // TODO: show suits
+  const cardDiv = createEl({
+    tag: 'div',
+    attributes: {
+      className: 'card border_5'
+    }
+  });
 
-  const msgCards = $('#msgCards');
-  msgCards.innerText += `${card.name}, `;
+  const name = createEl({ tag: 'h6', text: card.name });
+  const suit = createEl({ tag: 'h6', text: card.suit });
+
+  const divCards = $('#divCards');
+  cardDiv.append(name, suit);
+  divCards.append(cardDiv);
 };
 
 const clearSetUpScreen = () => {
@@ -52,18 +59,19 @@ const game = (player, cards) => {
       id: 'prize'
     }
   });
-  const msgCards = createEl({
-    tag: 'h3',
-    text: 'Cards: ',
+
+  const divCards = createEl({
+    tag: 'div',
     attributes: {
-      id: 'msgCards'
+      id: 'divCards'
     }
   });
 
   const msgSum = createEl({
     tag: 'h3',
     attributes: {
-      id: 'msgSum'
+      id: 'msgSum',
+      className: 'border_5'
     }
   });
 
@@ -95,7 +103,7 @@ const game = (player, cards) => {
   drawCardBtn.disabled = true;
   divBtns.append(nextRoudBtn, drawCardBtn);
 
-  divGame.append(msgCards, msgSum, message, prize, divBtns);
+  divGame.append(divCards, msgSum, message, prize, divBtns);
 
   const getCard = () => {
     const index = Math.floor(Math.random() * cards.length);
@@ -132,12 +140,13 @@ const game = (player, cards) => {
   };
 
   drawCardBtn.addEventListener('click', () => {
+    gameTitle.innerText = 'Cards:';
     getCard();
     sumAndAsk();
   });
 
   nextRoudBtn.addEventListener('click', () => {
-    [msgCards, msgSum, message, prize, divBtns].forEach((e) => e.remove());
+    [divCards, msgSum, message, prize, divBtns].forEach((e) => e.remove());
     game(player, cardGenerator());
   });
 

@@ -10,14 +10,14 @@ playBtn.addEventListener('click', () => {
   hideEl(playBtn);
   const h2 = createEl({
     tag: 'h2',
-    text: "Let's play!!!",
+    text: "LET'S PLAY!!",
     attributes: {
       id: 'gameTitle'
     }
   });
   const input = createEl({
     tag: 'input',
-    attributes: { id: 'inputName' }
+    attributes: { id: 'inputName', className: 'border_5' }
   });
   const label = createEl({
     tag: 'label',
