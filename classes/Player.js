@@ -4,7 +4,11 @@ export default class Player {
     this.prize = 0;
   }
 
-  win() {
-    this.prize += 1000;
+  win(cards) {
+    const cardsTotalPrize = cards.reduce(
+      (sum, card) => sum + card.getCardPrize,
+      0
+    );
+    this.prize += cardsTotalPrize + 1000;
   }
 }

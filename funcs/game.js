@@ -117,7 +117,7 @@ const game = (player, cards) => {
 
     if (totalSum >= 18 && totalSum <= 21) {
       message.innerText = totalSum === 21 ? 'BLACKJAAAACK!!!' : 'YOU WIN!!!!!';
-      player.win();
+      player.win(roundCards);
       prize.innerText = `Your current prize is ${player.prize}`;
     } else if (totalSum > 21) {
       message.innerText = 'YOU LOSEEEEE!!! Sorry :cc';

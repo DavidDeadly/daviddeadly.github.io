@@ -1,9 +1,13 @@
 export default class Card {
   #value;
 
+  #prize;
+
   constructor(name, value, suit) {
+    const isLetter = Number.isNaN(Number(name));
     this.name = name;
     this.suit = suit;
+    this.#prize = isLetter ? 500 : 100;
     if (name === 'A') {
       this.#value = 11;
       this.alreadyThrown = () => {
@@ -16,6 +20,10 @@ export default class Card {
 
   get getCardValue() {
     return this.#value;
+  }
+
+  get getCardPrize() {
+    return this.#prize;
   }
 
   static nerfAces(cards, suit) {
