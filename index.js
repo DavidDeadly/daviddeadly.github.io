@@ -1,6 +1,6 @@
 import setUpGame from './funcs/setUpGame.js';
 import { $, hideEl, createEl } from './funcs/utilDomFuncs.js';
-import { cleanGameScreen } from './funcs/game.js';
+import { cleanGameScreen } from './funcs/clearScreens.js';
 
 // Elements
 const playBtn = $('#playBtn'),

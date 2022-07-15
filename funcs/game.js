@@ -1,39 +1,10 @@
 import Card from '../classes/Card.js';
 import cardGenerator from './cardGenerator.js';
-import { $, hideEl, createEl, appearEl } from './utilDomFuncs.js';
+import { $, createEl, appearEl } from './utilDomFuncs.js';
+import { clearSetUpScreen } from './clearScreens.js';
+import presentCard from './presentCard.js';
 
 const divGame = $('#game');
-
-export const cleanGameScreen = () => {
-  [$('#divCards'), $('#msgSum'), $('#msg'), $('#prize')].forEach((e) =>
-    e.remove()
-  );
-};
-
-const presentCard = (card) => {
-  const cardDiv = createEl({
-    tag: 'div',
-    attributes: {
-      className: 'card border_5'
-    }
-  });
-
-  const name = createEl({ tag: 'h6', text: card.name });
-  const suit = createEl({ tag: 'h6', text: card.suit });
-
-  const divCards = $('#divCards');
-  cardDiv.append(name, suit);
-  divCards.append(cardDiv);
-};
-
-const clearSetUpScreen = () => {
-  const input = $('#inputName'),
-    label = $('#labelName'),
-    startBtn = $('#startBtn');
-  hideEl(input);
-  hideEl(label);
-  hideEl(startBtn);
-};
 
 const game = (player, cards) => {
   clearSetUpScreen();
