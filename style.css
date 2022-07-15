@@ -88,4 +88,9 @@ h2 {
 .btns:disabled {
   background-color: gray;
   cursor: default;
+  transform: none;
+  -webkit-transform: none;
+  -moz-transform: none;
+  -ms-transform: none;
+  -o-transform: none;
 }

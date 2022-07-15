@@ -1,7 +1,14 @@
 import Card from '../classes/Card.js';
-import { $, toggelEl, createEl } from './utilDomFuncs.js';
+import cardGenerator from './cardGenerator.js';
+import { $, hideEl, createEl, appearEl } from './utilDomFuncs.js';
 
 const divGame = $('#game');
+
+export const cleanGameScreen = () => {
+  [$('#msgCards'), $('#msgSum'), $('#msg'), $('#prize')].forEach((e) =>
+    e.remove()
+  );
+};
 
 const presentCard = (card) => {
   // TODO: show suits
@@ -16,9 +23,9 @@ const clearSetUpScreen = () => {
   const input = $('#inputName'),
     label = $('#labelName'),
     startBtn = $('#startBtn');
-  toggelEl(input);
-  toggelEl(label);
-  toggelEl(startBtn);
+  hideEl(input);
+  hideEl(label);
+  hideEl(startBtn);
 };
 
 const game = (player, cards) => {
@@ -26,6 +33,9 @@ const game = (player, cards) => {
   const roundCards = [];
 
   const gameTitle = $('#gameTitle');
+  const playAgainBtn = $('#startBtn');
+  playAgainBtn.innerText = 'Play again';
+
   gameTitle.innerText = 'Here are your initial cards!!';
 
   const message = createEl({
@@ -64,12 +74,12 @@ const game = (player, cards) => {
     }
   });
 
-  const restartGameBtn = createEl({
+  const nextRoudBtn = createEl({
     tag: 'button',
-    text: 'Play Again',
+    text: 'Next Round',
     attributes: {
       className: 'btns border_5 d_transition',
-      id: 'restartBtn'
+      id: 'nextBtn'
     }
   });
 
@@ -83,19 +93,9 @@ const game = (player, cards) => {
   });
 
   drawCardBtn.disabled = true;
-  divBtns.append(restartGameBtn, drawCardBtn);
+  divBtns.append(nextRoudBtn, drawCardBtn);
 
   divGame.append(msgCards, msgSum, message, prize, divBtns);
-
-  // const askForPlayAgain = () => {
-  //   consoleInput.question('Do you want to play again? [Y]/[N]', (ans) => {
-  //     if (ans.toUpperCase() !== 'Y') {
-  //       console.log(`This is your total score: ${player.prize}\n`);
-  //       process.exit();
-  //     }
-  //     game(player, consoleInput);
-  //   });
-  // };
 
   const getCard = () => {
     const index = Math.floor(Math.random() * cards.length);
@@ -112,17 +112,22 @@ const game = (player, cards) => {
     );
 
     msgSum.innerText = `Sum: ${totalSum}`;
+    drawCardBtn.disabled = true;
+    nextRoudBtn.disabled = false;
 
     if (totalSum >= 18 && totalSum <= 21) {
       message.innerText = totalSum === 21 ? 'BLACKJAAAACK!!!' : 'YOU WIN!!!!!';
       player.win();
       prize.innerText = `Your current prize is ${player.prize}`;
-      // askForPlayAgain();
     } else if (totalSum > 21) {
       message.innerText = 'YOU LOSEEEEE!!! Sorry :cc';
       prize.innerText = `This is your total score: ${player.prize}`;
+      divBtns.remove();
+      appearEl(playAgainBtn);
+      divGame.append(playAgainBtn);
     } else {
       drawCardBtn.disabled = false;
+      nextRoudBtn.disabled = true;
     }
   };
 
@@ -131,11 +136,15 @@ const game = (player, cards) => {
     sumAndAsk();
   });
 
+  nextRoudBtn.addEventListener('click', () => {
+    [msgCards, msgSum, message, prize, divBtns].forEach((e) => e.remove());
+    game(player, cardGenerator());
+  });
+
   getCard();
   getCard();
 
   sumAndAsk();
-  // askForPlayAgain();
 };
 
 export default game;

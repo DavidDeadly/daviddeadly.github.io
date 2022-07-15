@@ -24,6 +24,7 @@
     "one-var": "off",
     "no-return-assign": "off",
     "no-param-reassign": "off",
-    "no-unused-expressions": "off"
+    "no-unused-expressions": "off",
+    "import/no-cycle": "warn"
   }
 }
