@@ -1,7 +1,10 @@
 # SofkaU BlackJack JavaScript homework
 
-## Player naming and game start
-### Prompt
+## _There's a tag for the cli version of the game... called 'cli'._
+
+
+### Player naming and game start
+#### Prompt
 ![Screenshot from 2022-07-12 20-36-11](https://user-images.githubusercontent.com/88601542/178629894-3e9fd28b-add0-4eb4-a379-1b71c681aebf.png)
 ![Screenshot from 2022-07-12 20-37-00](https://user-images.githubusercontent.com/88601542/178629909-f31d117f-d381-4cbc-ae27-fc7a7f4d258b.png)
 <br></br>
@@ -9,8 +12,8 @@
 ![Screenshot from 2022-07-12 20-37-21](https://user-images.githubusercontent.com/88601542/178629914-975f4408-daaf-4e4d-8cea-b6f1e748a00d.png)  
 
 
-## Gaming
-### Characteristics
+### Gaming
+#### Characteristics
 * initial prize = 0;
 * First cards randomly chosen  
 * Sum of the cards & winning margin (18 | 21)
